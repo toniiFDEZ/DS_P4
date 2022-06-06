@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_02_145533) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_06_092258) do
   create_table "developers", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.string "surname"
@@ -21,13 +21,49 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_02_145533) do
     t.index ["surname"], name: "index_developers_on_surname"
   end
 
+  create_table "inicio_sesions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "usuario"
+    t.string "password"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "productos", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "nombre"
+    t.float "precio"
+    t.integer "cantidad"
+    t.string "color"
+    t.string "tipo"
+    t.integer "IDusuario", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "projects", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
-    t.integer "team", null: false
+    t.integer "team"
     t.text "info"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["team"], name: "index_projects_on_team", unique: true
+  end
+
+  create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.string "password"
+    t.string "email"
+    t.string "direccion"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "usuarios", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.string "password"
+    t.string "email"
+    t.string "direccion"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "developers", "projects"
